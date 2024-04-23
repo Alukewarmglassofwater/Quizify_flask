@@ -3,3 +3,6 @@
 
 # Quizify/template/app
 - Main stuff
+
+# venv
+- Flask environment 
