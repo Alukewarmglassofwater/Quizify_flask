@@ -1,4 +1,4 @@
-from flask import render_template
+from flask import render_template, url_for
 from app import app
 from app.forms import LoginForm
 from flask import send_from_directory
@@ -21,12 +21,11 @@ def home():
 @app.route('/login', methods=['GET', 'POST'])
 
 def login():
-    form = LoginForm()
+    form = LoginForm()  # Create an instance of the LoginForm class
     if form.validate_on_submit():
-        flash('Login requested for user {}, remember_me={}'.format(
-            form.username.data, form.remember_me.data))
-        return redirect('/index')
-    return render_template('login.html', title='Sign In', form=form)
+        # Add your login logic here
+        return redirect(url_for('home'))  # Redirect to home page after successful login
+    return render_template('login.html', title='Login', form=form)
 
 @app.route('/register')
 def register():

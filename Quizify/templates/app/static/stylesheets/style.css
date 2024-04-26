@@ -1,3 +1,13 @@
+
+#navbar {
+    position: fixed; /* or 'absolute' depending on your layout requirements */
+    top: 0;
+    left: 0;
+    width: 100%;     
+    background-color: red;     
+}
+
+
 body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
@@ -9,9 +19,10 @@ body {
     height: 100vh;
 }
 
-.container {
+    .container {
     background-color: #fff;
     padding: 20px;
+    margin-right: 580px;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     width: 300px;
@@ -48,13 +59,13 @@ input[type="submit"]:hover {
 
 }
 body {
-    background-image: url("../kelli-tungay-2LJ4rqK2qfU-unsplash.jpg");
+    background-image: url("../images/kelli-tungay-2LJ4rqK2qfU-unsplash.jpg");
     background-size: cover;
 
 }
 
 #homepagebackground {
-    background-image: url("../homepagebackground.avif");
+    background-image: url("../images/homepagebackground.avif");
     background-size: cover;
 }
 
@@ -122,10 +133,10 @@ body {
     width: 800px;
     height: 150px;
     align-self: start;
-}
+} 
 
-/*this worked with different grid layout. REDACTED*/
-/*.math {
+/*this worked with different grid layout. REDACTED
+math {
     background-color: blue;
     grid-row: 4 / 7;
     grid-column: 3 / 19;
@@ -138,16 +149,15 @@ body {
     grid-row: 9 / 12;
     grid-column: 3 / 19;
     text-align: center;
-}*/
+}
 
 
-#mathtext {margin-top: 7.5%;}
+ #mathtext {margin-top: 7.5%;}
 
-#englishtext {margin-top: 7.5%;}
+#englishtext {margin-top: 7.5%;} 
 
 header {background-color: #666;
     padding: 30px;
     text-align: center;
     font-size: 35px;
-    color: white;}
-
+    color: white;} */
