@@ -1,12 +1,10 @@
-# Stuff from non-flask implement
-- Ignore it
-
-# Quizify/template/app
+# app folder
 - Main stuff
+- templates: html file
+- static: css and images files
 
-# venv
-- Flask environment 
-- Something
-- Hello
-- Again
-- Again
+# requirements.txt
+- install flask and extra module using this
+
+# Miscellaneous
+- .flaskenv : no need to have extra step of 'FLASK_APP=quizify.py' just 'flask run'
