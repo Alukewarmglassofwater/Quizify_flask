@@ -1,0 +1,160 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    margin-right: 500px;
+}
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+input[type="submit"] {
+    background-color: #4caf50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+}
+input[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+#navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: red;
+}
+#logoimage {position: absolute;
+    top: 30px;
+    left: 37%;
+    width: 400px; /* Adjust as per your image size */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 8px;
+
+}
+body {
+    background-image: url("../images/kelli-tungay-2LJ4rqK2qfU-unsplash.jpg");
+    background-size: cover;
+
+}
+
+#homepagebackground {
+    background-image: url("../images/homepagebackground.avif");
+    background-size: cover;
+}
+
+#mcqbackround {background-color: orange;}
+
+#textboxid {height: 200px;}
+
+#titlediv {
+    position: absolute;
+    top: 220px;
+    width: 800px;
+    height: 80px;
+    background-color: lightseagreen;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.leaderboard {
+    background-color: orange;
+    float: left;
+    position: absolute;
+    text-align: center;
+    left: 40px;
+    bottom: 40px;
+    width: 400px;
+    height: 640px;
+    /*grid stuff here*/
+
+}
+
+.homepagecontainer {
+    background-color: green;
+    float: right;
+    text-align: center;
+    right: 40px;
+    bottom: 40px;
+    width: 1000px;
+    height: 640px;
+    position: absolute;
+    display: grid;
+    grid-template-rows: repeat(2,320px);
+    grid-template-columns: repeat(1,1000px);
+    justify-content: space-evenly;
+    justify-items: center;
+    align-content: space-evenly;
+    grid-gap: 130px;
+}
+
+
+.math {
+    background-color: blue;
+    grid-row: 1 / 1 ;
+    grid-column: 1 / 1 ;
+    text-align: center;
+    width: 800px;
+    height: 150px;
+    align-self: end;
+}
+
+.english {
+    background-color: red;
+    grid-row: 2 / 2 ;
+    grid-column: 1 / 1 ;
+    text-align: center;
+    width: 800px;
+    height: 150px;
+    align-self: start;
+}
+
+/*this worked with different grid layout. REDACTED*/
+/*.math {
+    background-color: blue;
+    grid-row: 4 / 7;
+    grid-column: 3 / 19;
+    text-align: center;
+    vertical-align: bottom;
+}
+
+.english {
+    background-color: red;
+    grid-row: 9 / 12;
+    grid-column: 3 / 19;
+    text-align: center;
+}*/
+
+
+#mathtext {margin-top: 7.5%;}
+
+#englishtext {margin-top: 7.5%;}
+
+header {background-color: #666;
+    padding: 30px;
+    text-align: center;
+    font-size: 35px;
+    color: white;}
+
