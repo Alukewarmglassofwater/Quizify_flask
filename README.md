@@ -7,4 +7,6 @@
 - install flask and extra module using this
 
 # Miscellaneous
-- .flaskenv : no need to have extra step of 'FLASK_APP=quizify.py' just 'flask run'
+- .flaskenv : 
+    1. `pip install python-dotenv`
+    2. no need to have extra step of 'FLASK_APP=quizify.py' just 'flask run'
