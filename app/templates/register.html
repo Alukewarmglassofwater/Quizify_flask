@@ -3,8 +3,9 @@
 {% block content %}
 <body>
     <div class="container">
-        <h2>Staff Login</h2>
-        <form action="#" method="post">
+        <h2>Register</h2>
+        <form action="#" method="POST">
+        {{form.hidden_tag()}}
             <label for="username">Username</label>
             <input type="text" id="username" name="username" placeholder="Enter your username" required>
             <label for="password">Password</label>

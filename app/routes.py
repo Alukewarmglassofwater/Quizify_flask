@@ -1,12 +1,6 @@
-from flask import render_template
 from app import app
-from app.forms import LoginForm
-from flask import send_from_directory
-from flask import url_for, flash, redirect
+from flask import render_template
 
-import os
-
-#don't know why this is broken
 @app.route('/favicon.ico')
 def favicon():
     return send_from_directory('static/favicon', 'favicon.ico', mimetype='image/x-icon')
@@ -22,12 +16,7 @@ def home():
 @app.route('/login', methods=['GET', 'POST'])
 
 def login():
-    form = LoginForm()
-    if form.validate_on_submit():
-        flash('Login requested for user {}, remember_me={}'.format(
-            form.username.data, form.remember_me.data))
-        return redirect('/index')
-    return render_template('login.html', title='Sign In', form=form)
+    return render_template('login.html', title='Sign In')
 
 @app.route('/register')
 def register():

@@ -1,9 +1,9 @@
-from flask import Flask
-from .config import Config
+from flask import Flask, url_for
+from flask_sqlalchemy import SQLAlchemy
+from flask_login import UserMixin
 
-app = Flask(__name__,
-            static_folder='static',
-            static_url_path='/static')
-app.config.from_object(Config)
+
+
+app = Flask(__name__)
 
 from app import routes

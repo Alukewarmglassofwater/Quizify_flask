@@ -15,8 +15,10 @@ body {
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     width: 300px;
-    margin-right: 500px;
+    margin-right: 670px;
 }
+
+
 input[type="text"],
 input[type="password"] {
     width: 100%;
@@ -41,7 +43,7 @@ input[type="submit"]:hover {
 }
 
 #navbar {
-    position: fixed;
+    position: absolute;
     top: 0;
     width: 100%;
     background-color: red;
@@ -52,6 +54,8 @@ input[type="submit"]:hover {
     width: 400px; /* Adjust as per your image size */
     height: auto; /* Maintain aspect ratio */
     border-radius: 8px;
+
+
 
 }
 body {
@@ -72,11 +76,13 @@ body {
 #titlediv {
     position: absolute;
     top: 220px;
+    left: 50%;
     width: 800px;
     height: 80px;
     background-color: lightseagreen;
     text-align: center;
-    vertical-align: middle;
+    /* Remove vertical-align: middle; */
+    transform: translateX(-50%);
 }
 
 .leaderboard {
@@ -130,22 +136,6 @@ body {
     height: 150px;
     align-self: start;
 }
-
-/*this worked with different grid layout. REDACTED*/
-/*.math {
-    background-color: blue;
-    grid-row: 4 / 7;
-    grid-column: 3 / 19;
-    text-align: center;
-    vertical-align: bottom;
-}
-
-.english {
-    background-color: red;
-    grid-row: 9 / 12;
-    grid-column: 3 / 19;
-    text-align: center;
-}*/
 
 
 #mathtext {margin-top: 7.5%;}
