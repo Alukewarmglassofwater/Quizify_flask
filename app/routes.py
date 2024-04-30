@@ -1,5 +1,6 @@
 from app import app
 from flask import render_template, request
+import sqlite3
 
 @app.route('/favicon.ico')
 def favicon():
@@ -18,12 +19,25 @@ def login():
     if request.method == "POST":
        username = request.form.get("username")
        password = request.form.get("password")
-       if len(password) < 3:
-           return "password length need to be at least 3 characters"
     return render_template('login.html', title='Sign In')
 
-@app.route('/register')
+@app.route('/register', methods=['GET', 'POST'])
 def register():
+    first_name = request.form.get("first_name")
+    last_name = request.form.get("last_name")
+    username = request.form.get("username")
+    password = request.form.get("password")
+
+    # Connect to SQLite database and insert data
+    conn = sqlite3.connect('users.db')
+    c = conn.cursor()
+    c.execute('''CREATE TABLE IF NOT EXISTS users
+                 (first_name TEXT, last_name TEXT, username TEXT, password TEXT)''')
+    c.execute('INSERT INTO users (first_name, last_name, username, password) VALUES (?, ?, ?, ?)',
+              (first_name, last_name, username, password))
+    conn.commit()
+    conn.close()
+
     return render_template('register.html', title='Register')
 
 
