@@ -25,7 +25,7 @@
         <a class="rightlink" href="/register">Register</a>
         <a href="/quizmcq">quizmcq</a>
         <a href="/quizsa">quizsa</a>
-
+        <a href="/logout">Logout</a>
     </div>
 
     <!--flashes error message if there is one-->
@@ -34,7 +34,7 @@
     {% if messages %}
     <ul>
         {% for message in messages %}
-        <li>{{ message }}</li>
+        <p>{{ message }}</p>
         {% endfor %}
     </ul>
     {% endif %}

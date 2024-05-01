@@ -6,4 +6,6 @@ from flask_login import UserMixin
 
 app = Flask(__name__)
 
+app.secret_key = "secrets"
+
 from app import routes
