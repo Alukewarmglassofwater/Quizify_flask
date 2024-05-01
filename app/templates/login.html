@@ -13,7 +13,7 @@
                 request.form.password }}">
             <input type="submit" value="Login">
             {% for message in messages %}
-                <p id="flashmessage">{{ message }}</p>
+                {{ message }}
             {% endfor %}
         </form>
         {% if error %}
