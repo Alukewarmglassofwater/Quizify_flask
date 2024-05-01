@@ -61,6 +61,7 @@ def home():
 
 @app.route('/register')
 def register():
+    """  
     first_name = request.form.get("first_name")
     last_name = request.form.get("last_name")
     username = request.form.get("username")
@@ -74,7 +75,8 @@ def register():
     c.execute('INSERT INTO users (first_name, last_name, username, password) VALUES (?, ?, ?, ?)',
               (first_name, last_name, username, password))
     conn.commit()
-    conn.close()
+    conn.close() 
+    """
 
     return render_template('register.html', title='Register')
 
