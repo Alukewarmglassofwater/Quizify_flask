@@ -1,0 +1,58 @@
+.homepagecontainer {
+    background-color: rgb(158, 136, 149);
+    position: absolute;
+    right: 4vw;
+    bottom: 4vh;
+    width: 50%;
+    height: auto;
+    display: grid;
+    grid-template: repeat(2, 1fr) / repeat(1, 1fr);
+    justify-content: space-evenly;
+    align-content: space-evenly;
+    grid-gap: 13vh;
+    text-align: center;
+}
+
+.math, .english {
+    text-align: center;
+    width: 100%;
+    height: auto;
+    grid-column: 1 / 1 ;
+}
+
+.math {
+    background-color: rgb(119, 119, 170);
+    grid-row: 1 / 1 ;
+    align-self: end;
+}
+
+.english {
+    background-color: rgb(48, 173, 115);
+    grid-row: 2 / 2 ;
+    align-self: start;
+}
+#mathtext {margin-top: 7.5%;}
+
+#englishtext {margin-top: 7.5%;}
+
+#titlediv {
+    position: absolute;
+    top: 22vh;
+    left: 50%;
+    width: 80vw;
+    height: 8vh;
+    background-color: rgb(144, 17, 81);
+    text-align: center;
+    transform: translateX(-50%);
+}
+
+.leaderboard {
+    background-color: orange;
+    position: absolute;
+    left: 4vw;
+    bottom: 4vh;
+    width: 30%;
+    height: 64vh;
+    text-align: center;
+}
+
