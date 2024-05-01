@@ -23,3 +23,6 @@
 - .gitignore
     1. ignore venv file
 
+- Username: test@gmail.com
+- Pass: test
+
