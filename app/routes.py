@@ -61,6 +61,21 @@ def home():
 
 @app.route('/register')
 def register():
+    first_name = request.form.get("first_name")
+    last_name = request.form.get("last_name")
+    username = request.form.get("username")
+    password = request.form.get("password")
+
+    # Connect to SQLite database and insert data
+    conn = sqlite3.connect('users.db')
+    c = conn.cursor()
+    c.execute('''CREATE TABLE IF NOT EXISTS users
+                 (first_name TEXT, last_name TEXT, username TEXT, password TEXT)''')
+    c.execute('INSERT INTO users (first_name, last_name, username, password) VALUES (?, ?, ?, ?)',
+              (first_name, last_name, username, password))
+    conn.commit()
+    conn.close()
+
     return render_template('register.html', title='Register')
 
 
