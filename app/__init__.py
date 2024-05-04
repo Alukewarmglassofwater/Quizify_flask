@@ -4,8 +4,6 @@ from flask_login import UserMixin
 import os
 import sqlite3
 
-
-
 app = Flask(__name__)
 app.secret_key = "secrets"
 
