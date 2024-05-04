@@ -4,7 +4,7 @@ connection = sqlite3.connect("database.db")
 cursor = connection.cursor()
 
 # Create table for multiple-choice questions
-cursor.execute("CREATE TABLE multichoice (question TEXT, answer1 TEXT, answer2 TEXT, answer3 TEXT, answer4 TEXT)")
+cursor.execute("CREATE TABLE multichoice (question TEXT, correctanswer TEXT, answer2 TEXT, answer3 TEXT, answer4 TEXT)")
 
 # Create table for short-answer questions
 cursor.execute("CREATE TABLE shortanswerquestions (question TEXT)")
