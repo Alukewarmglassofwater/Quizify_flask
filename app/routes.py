@@ -4,9 +4,9 @@ from functools import wraps
 import sqlite3
 
 
-
-DATABASE = 'app/database.db'
-DATABASE_1 = 'app/users.db'
+# Connect to .db file
+DATABASE = 'app/instance/database.db'
+DATABASE_1 = 'app/instance/users.db'
 
 # Fetch questions and answers from the database
 def get_question(index):
