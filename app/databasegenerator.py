@@ -12,6 +12,9 @@ cursor.execute("CREATE TABLE shortanswerquestions (question TEXT)")
 # Create table for user
 cursor.execute("CREATE TABLE user (username TEXT, email TEXT, password TEXT)")
 
+# Create table for user quiz score
+cursor.execute("CREATE TABLE userquizscore (email TEXT, score INTEGER)")
+
 multi_choice_list = [
     ("What is the capital of Australia?", "Melbourne", "Sydney", "Canberra", "Tokyo"),
     ("What is the capital of Germany?", "Berlin", "Munich", "Hamburg", "Paris"),
