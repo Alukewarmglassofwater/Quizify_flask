@@ -2,20 +2,10 @@ from app import app
 from flask import Flask, render_template, redirect, url_for, request, session, flash, g, send_from_directory
 from functools import wraps
 import sqlite3
-
+import re
 
 # Connect to .db file
 DATABASE = 'app/instance/database.db'
-DATABASE_1 = 'app/instance/users.db'
-
-# Fetch questions and answers from the database
-def get_question(index):
-    conn = sqlite3.connect(DATABASE)
-    cursor = conn.cursor()
-    cursor.execute("SELECT * FROM multichoice LIMIT 1 OFFSET ?", (index,))
-    question_data = cursor.fetchone()
-    conn.close()
-    return question_data
 
 @app.route('/favicon.ico')
 def favicon():
@@ -55,33 +45,48 @@ def logout():
 
 @app.route('/home')
 @login_required
-
 def home():
     user = {'username': 'Teststudent'}
     return render_template('home.html', title='Home')
 
 
-@app.route('/register')
+@app.route('/register', methods = ['GET', 'POST'])
 def register():
-     
-    first_name = request.form.get("first_name")
-    last_name = request.form.get("last_name")
-    username = request.form.get("username")
-    password = request.form.get("password")
-  
-    # Connect to SQLite database and insert data
-    conn = sqlite3.connect(DATABASE_1)
-    c = conn.cursor()
-    c.execute('''CREATE TABLE IF NOT EXISTS users
-                 (first_name TEXT, last_name TEXT, username TEXT, password TEXT)''')
-    c.execute('INSERT INTO users (first_name, last_name, username, password) VALUES (?, ?, ?, ?)',
-              (first_name, last_name, username, password))
-    conn.commit()
-    conn.close() 
-
-    return render_template('register.html', title='Register')
+    mesage = ''
+    # Check if user fill the form or not or is it the correct format
+    if request.method == 'POST' and 'name' in request.form and 'password' in request.form and 'email' in request.form :
+        userName = request.form['name']
+        password = request.form['password']
+        email = request.form['email']
+        conn = sqlite3.connect(DATABASE)
+        c = conn.cursor()
+        account = c.fetchone()
+        if account:
+            mesage = 'Account already exists !'
+        elif not re.match(r'[^@]+@[^@]+\.[^@]+', email):
+            mesage = 'Invalid email address !'
+        elif not userName or not password or not email:
+            mesage = 'Please fill out the form !'
+        else:
+            c.execute('''INSERT INTO user (name, email, password)VALUES (?, ?, ?)''', 
+                      (userName, email, password))
+            conn.commit()
+            conn.close() 
+            mesage = 'You have successfully registered !'
+    elif request.method == 'POST':
+        mesage = 'Please fill out the form !'
+    return render_template('register.html', mesage = mesage)
 
 #possibly mcq quiz logic?? not really sure how it works??
+# Fetch questions and answers from the database
+def get_question(index):
+    conn = sqlite3.connect(DATABASE)
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM multichoice LIMIT 1 OFFSET ?", (index,))
+    question_data = cursor.fetchone()
+    conn.close()
+    return question_data
+
 @app.route('/quizmcq', methods=['GET', 'POST'])
 def quiz():
     if request.method == 'POST':
