@@ -60,6 +60,7 @@ def register():
         email = request.form['email']
         conn = sqlite3.connect(DATABASE)
         c = conn.cursor()
+        c.execute('SELECT * FROM user WHERE email = ?', (email,))
         account = c.fetchone()
         if account:
             mesage = 'Account already exists !'
