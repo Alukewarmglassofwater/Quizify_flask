@@ -6,6 +6,9 @@ import re
 
 # Connect to .db file
 DATABASE = 'app/instance/database.db'
+# list of answers selected by the user
+user_answer_list = []
+correct_answer_list = []
 
 @app.route('/favicon.ico')
 def favicon():
@@ -104,9 +107,8 @@ def quiz():
     if request.method == 'POST':
         # Get selected answer
         selected_answer = request.form['answer']
-        # Check the selected answer and do something (e.g., store results)
-        # For simplicity, let's just print the selected answer for now
-        print("Selected Answer:", selected_answer)
+        user_answer_list.append(selected_answer)
+        print("list: ", user_answer_list)
 
         # Increment the question index for the next question
         index = int(request.args.get('index', 0)) + 1
@@ -117,13 +119,28 @@ def quiz():
 
     # Fetch the question and answer options from the database
     question_data = get_question(index)
+    
     if question_data:
-        question, answer1, answer2, answer3, answer4 = question_data
+        question, answer1, answer2, answer3, answer4, correct_answer = question_data
         options = [answer1, answer2, answer3, answer4]
-        return render_template('quizmcq.html', question=question, options=options, index=index)
+        correct_answer_list.append(correct_answer)
+        return render_template('quizmcq.html', question=question, options=options, index=index, correct_answer=correct_answer)
     else:
         # No more questions, quiz completed
-        return "Quiz completed!"
+        score_sum = 0
+        for index, item in enumerate(user_answer_list):
+            if user_answer_list[index] == correct_answer_list[index]:
+                score_sum = score_sum + 1
+        
+        # store quiz score into the database
+        conn = sqlite3.connect(DATABASE)
+        c = conn.cursor()
+        c.execute('''INSERT INTO userquizscore (email, score)VALUES ( ?, ?)''', 
+                      (session.get("email"), score_sum))
+        conn.commit()
+        conn.close() 
+                
+        return "Quiz completed!" + "Total correct answers: " + str(score_sum)
 
 @app.route('/quizsa', methods=['GET', 'POST'])
 def quizsa():

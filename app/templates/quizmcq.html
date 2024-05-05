@@ -10,7 +10,7 @@
         <div class="options" id="mcqbackground">
             {% for option in options %}
             <div class="option">
-                <input type="radio" id="{{ option }}" class="mcq" name="answer" value="{{ option }}">
+                <input type="radio" id="{{ option }}" class="mcq" name="answer" value="answer{{ loop.index }}">
                 <label for="{{ option }}">{{ option }}</label>
                 {% if option == correct_answer %}
                     <span style="color: green;">(Correct answer)</span>
