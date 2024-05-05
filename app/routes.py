@@ -25,16 +25,27 @@ def login_required(f):
 @app.route('/')
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    ##handles login. email= test@gmail.com | Password= test
-    error = None
-    if request.method == 'POST':
-        if request.form['username'] != 'test@gmail.com' or request.form['password'] != 'test':
-            error = 'Invalid Credentials. Please try again.'
-        else:
+    mesage = ''
+    if request.method == 'POST' and 'email' in request.form and 'password' in request.form:
+        email = request.form['email']
+        password = request.form['password']        
+        conn = sqlite3.connect(DATABASE)
+        conn.row_factory = sqlite3.Row  
+        c = conn.cursor()
+        # Select all user to check correct email and pass
+        c.execute('SELECT * FROM user WHERE email = ? AND password = ?', (email, password, ))
+        user = c.fetchone()
+        if user:
             session['logged_in'] = True
-            flash('Login successful!')
+            session['ID'] = user['ID']
+            session['name'] = user['name']
+            session['email'] = user['email']
+            mesage = 'Logged in successfully !'
             return redirect(url_for('home'))
-    return render_template('/login.html', error=error)
+        else:
+            mesage = 'Please enter correct email / password !'
+    return render_template('login.html', mesage = mesage)
+
 
 @app.route('/logout')
 @login_required

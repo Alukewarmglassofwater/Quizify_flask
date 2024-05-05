@@ -3,7 +3,7 @@
 {% block content %}
 <body>
     <div class="container">
-        <h2>Login</h2>
+        <!-- <h2>Login</h2>
         <form action="/login" method="post">
             <label for="username">Username</label>
             <input 
@@ -24,7 +24,19 @@
         </form>
         {% if error %}
         <p class="error"><strong>Error:</strong> {{ error }}
-        {% endif %}
+        {% endif %} -->
+        <h2>User Login</h2>
+        <form action="/login" method="POST">
+            {% if mesage is defined and mesage %}
+                <div class="alert alert-warning">{{ mesage }}</div>
+            {% endif %}
+            <label for="email">Email:</label><br>
+            <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" name="email"><br>
+            <label for="pwd">Password:</label><br>
+            <input type="password" class="form-control" id="password" name="password" placeholder="Enter password" name="pswd"><br>
+            <input type="submit" value="Login"><br>
+            <p class="bottom">Dont't have an account?  <a class="bottom" href="{{url_for('register')}}"> Register here</a></p>
+        </form>
     </div>
 </body>
 </html>
