@@ -35,11 +35,35 @@ body {
     top: 0;
     width: 100%;
 } 
-#navbar {
+/* .navbar {
     width: 100%;
     height: auto; 
     background-color: rgb(82, 121, 165);
-} 
+}  */
+
+.navbar ul {
+    list-style-type: none;
+    padding: 0px;
+    margin: 0px;
+    background-color: rgb(30, 107, 196);
+    overflow: hidden;
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+    padding: 15px;
+    display: block;
+    text-align: center;
+}
+
+.navbar a:hover {
+    background-color:rgb(34, 78, 150);
+}
+.navbar li{
+    float: left;
+    font-weight: bold;
+}
 #logoimage {
     position: absolute;
     margin-top: 10px;

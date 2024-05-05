@@ -19,14 +19,13 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
     <div class="basecontainer">
-        <nav id="navbar">
-            Quizify:
-            <a href="/home">Home</a>
-            <a class="rightlink" href="/login">Login</a>
-            <a class="rightlink" href="/register">Register</a>
-            <a href="/quizmcq">quizmcq</a>
-            <a href="/quizsa">quizsa</a>
-            <a href="/logout">Logout</a> 
+        <nav class="navbar">
+            <ul>
+                <li><a href="/home">Home</a></li>
+                <li><a href="/login">Login</a></li>
+                <li><a href="/register">Register</a></li>
+                <li><a href="/logout">Logout</a></li>
+            </ul>
         </nav>
         <img id="logoimage" src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo">
     </div> 
