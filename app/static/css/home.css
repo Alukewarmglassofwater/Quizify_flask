@@ -16,7 +16,7 @@
 
 .classroom ul {
     list-style-type: none;
-    padding: 0px;
+    padding: 0%;
     margin: 0px;
     display: flex;
     flex-wrap: wrap;
@@ -27,15 +27,13 @@
     flex-basis: 100%;
 }
 
-
-
-/* .classroom a {
+ .classroom a {
     color: white;
     text-decoration: none;
     padding: 15px;
     display: block;
 }
-
+/*
 .classroom a:hover {
     background-color:rgb(177, 50, 124);
 } */
@@ -56,14 +54,16 @@
 
 #mcqImage:hover, #qaImage:hover {
     transform: scale(1.2);
+    border-radius: 20%;
+    border: 1px solid rgba(0, 0, 0, 0.652);
 }
 
-@media (min-width: 300px) {
+/* @media (min-width: 300px) {
 
     .classroom li {
         flex-basis: calc(50% - 10px);
     }
-}
+} */
 
 #titlediv {
     position: absolute;
