@@ -66,13 +66,28 @@ def logout():
 @app.route('/home')
 @login_required
 def home():
+    # get the current user email
+    email = session['email']
     conn = sqlite3.connect(DATABASE)
     c = conn.cursor()
+
+    # Fetch the leaderboard
     c.execute('SELECT * FROM userquizscore ORDER BY score DESC')
-    leaderboard = c.fetchall() 
+    leaderboard = c.fetchall()
+
+    # Fetch the user profile if no score then score = 0
+    c.execute('''
+        SELECT user.ID, user.name, user.email, IFNULL(userquizscore.score, 0) as score
+        FROM user
+        LEFT JOIN userquizscore
+        ON user.email = userquizscore.email
+        WHERE user.email = ?
+    ''', (email,))
+    userProfile = c.fetchone()
     conn.commit()
-    conn.close() 
-    return render_template('home.html', leaderboard=leaderboard)
+    conn.close()
+
+    return render_template('home.html', leaderboard=leaderboard, userProfile=userProfile)
 
 
 @app.route('/register', methods = ['GET', 'POST'])

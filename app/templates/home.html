@@ -1,9 +1,9 @@
 {% extends "base.html"%}"
 
 {% block content %}
-<div id="titlediv">
+<!-- <div id="titlediv">
     <h1>This is Homepage</h1>
-</div>
+</div> -->
 
 <div class="leaderboard">
     <h2>Leaderboard</h2>
@@ -21,6 +21,14 @@
         </tr>
         {% endfor %}
     </table>
+</div>
+
+<div class="profile">
+    <h1>User Profile</h1>
+    <p><strong>ID:</strong> {{ userProfile[0] }}</p>
+    <p><strong>Name:</strong> {{ userProfile[1] }}</p>
+    <p><strong>Email:</strong> {{ userProfile[2] }}</p>
+    <p><strong>Score:</strong> {{ userProfile[3] }}</p>
 </div>
 
 <div class="classroom">
