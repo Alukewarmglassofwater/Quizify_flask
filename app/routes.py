@@ -57,11 +57,22 @@ def logout():
     flash('Logout successful!')
     return redirect('/login')
 
+# @app.route('/home')
+# @login_required
+# def home():
+#     user = {'username': 'Teststudent'}
+#     return render_template('home.html', title='Home')
+
 @app.route('/home')
 @login_required
 def home():
-    user = {'username': 'Teststudent'}
-    return render_template('home.html', title='Home')
+    conn = sqlite3.connect(DATABASE)
+    c = conn.cursor()
+    c.execute('SELECT * FROM userquizscore ORDER BY score DESC')
+    leaderboard = c.fetchall() 
+    conn.commit()
+    conn.close() 
+    return render_template('home.html', leaderboard=leaderboard)
 
 
 @app.route('/register', methods = ['GET', 'POST'])

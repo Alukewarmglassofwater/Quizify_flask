@@ -76,12 +76,57 @@
 }
 
 .leaderboard {
-    background-color: orange;
+    background-color: rgba(109, 69, 254, 0.99); /* Semi-transparent white */
+    padding: 20px;
+    border-radius: 15px;
     position: absolute;
     left: 4vw;
     bottom: 4vh;
     width: 30%;
     height: 64vh;
     text-align: center;
+    border: 2px solid #28075a;
+}
+.leaderboard h2 {
+    text-align: center;
+    color: #000000;
+    margin-bottom: 20px;
 }
 
+.leaderboard table{
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.leaderboard th,
+.leaderboard td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+.leaderboard tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+.leaderboard tr:nth-child(odd) {
+    background-color: #d5c4c4;
+}
+
+.leaderboard tr:nth-child(2) {
+    background-color: #f34949;
+}
+.leaderboard tr:nth-child(3) {
+    background-color: #e4f923;
+}
+.leaderboard tr:nth-child(4) {
+    background-color: #43d8f3;
+}
+.leaderboard th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    background-color: #4CAF50;
+    color: white;
+}
