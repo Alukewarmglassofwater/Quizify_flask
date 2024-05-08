@@ -31,15 +31,20 @@
 }
 
 #mcqImage, #qaImage {
-    width: 250px;
-    height: 200px;
+    width: 300px;
+    height: 250px;
 }
 
 #mcqImage {
-    margin-right: 550px;
+    position: relative;
+    top: 20px; /* Adjust the top position as needed */
+    right: 280px; /* Adjust the left position as needed */
 }
+
 #qaImage {
-    margin-left: 400px;
+    position: relative;
+    top: 20px; /* Adjust the top position as needed */
+    left: 200px; /* Adjust the left position as needed */
 }
 
 #shortanswertext {margin-right: 100px}
