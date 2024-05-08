@@ -17,17 +17,15 @@
     </div>
 </form>
 
-<div class="navigation">
-    <!-- Previous question button -->
+<!--can't get to work correctly-->
+<!--<div class="navigation">
     <form action="/quizsa" method="POST">
         <input type="hidden" name="index" value="{{ index - 1 }}">
         <button type="submit">Previous</button>
     </form>
-    <!-- Next question button -->
     <form action="/quizsa" method="POST">
         <input type="hidden" name="index" value="{{ index + 1 }}">
         <button type="submit">Next</button>
     </form>
-</div>
-
+</div>-->
 {% endblock %}
