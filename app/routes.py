@@ -20,9 +20,9 @@ def login_required(f):
         if 'logged_in' in session:
             return f(*args, **kwargs)
         else:
-            flash('Login is required.')
             return redirect(url_for('login'))
     return wrap
+
 
 
 @app.route('/')
@@ -54,14 +54,9 @@ def login():
 @login_required
 def logout():
     session.pop('logged_in', None)
-    flash('Logout successful!')
     return redirect('/login')
 
-# @app.route('/home')
-# @login_required
-# def home():
-#     user = {'username': 'Teststudent'}
-#     return render_template('home.html', title='Home')
+
 
 @app.route('/home')
 @login_required

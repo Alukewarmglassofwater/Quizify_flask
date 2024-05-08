@@ -34,19 +34,7 @@
             </ul>
         </nav>
         <img id="logoimage" src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo">
-    </div> 
-   
-    <!--flashes error message if there is one-->
-    <hr>
-    {% with messages = get_flashed_messages() %}
-    {% if messages %}
-    <ul>
-        {% for message in messages %}
-            {{ message }}
-        {% endfor %}
-    </ul>
-    {% endif %}
-    {% endwith %}
+    </div>
     {% block content %}{% endblock %}
 
 </body>
