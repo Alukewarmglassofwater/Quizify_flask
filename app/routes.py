@@ -194,7 +194,17 @@ def quizsa():
     if request.method == 'POST':
         # Get the submitted question index
         question_index = int(request.form['index'])
-
+        
+        # Check for button actions
+        if 'action' in request.form:
+            action = request.form['action']
+            if action == 'forward':
+                # Move to the next question
+                question_index += 1
+            elif action == 'backward':
+                # Move to the previous question
+                question_index -= 1
+        
         # Connect to the database
         conn = sqlite3.connect(DATABASE)
         cursor = conn.cursor()
@@ -205,16 +215,13 @@ def quizsa():
 
         # Check if the index is valid
         if 0 <= question_index < len(questions):
-            # Fetch the next question
-            next_question = questions[question_index]
+            # Fetch the current question
+            current_question = questions[question_index]
 
-            # Increment the question index for the next question
-            next_index = question_index + 1
+            # Close the database connection
+            conn.close()
 
-            # Check if there are more questions
-            if next_index < len(questions):
-                conn.close()
-                return render_template('quizsa.html', title='Shortanswer', question=next_question, index=next_index)
+            return render_template('quizsa.html', title='Shortanswer', question=current_question, index=question_index)
 
         # No more questions, quiz completed
         conn.close()
@@ -232,6 +239,7 @@ def quizsa():
         conn.close()
 
         return render_template('quizsa.html', title='Shortanswer', question=first_question, index=0)
+
 
 
 @app.route('/quizcompleted')

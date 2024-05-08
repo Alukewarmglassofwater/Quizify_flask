@@ -37,13 +37,13 @@
 
 #mcqImage {
     position: relative;
-    top: 20px; /* Adjust the top position as needed */
+    top: 5px; /* Adjust the top position as needed */
     right: 280px; /* Adjust the left position as needed */
 }
 
 #qaImage {
     position: relative;
-    top: 20px; /* Adjust the top position as needed */
+    top: 5px; /* Adjust the top position as needed */
     left: 200px; /* Adjust the left position as needed */
 }
 

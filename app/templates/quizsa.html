@@ -12,20 +12,14 @@
             <input type="text" id="textboxid" name="answer" maxlength="42"><br><br>
             <p>
                 <input id="submit" type="submit" value="Submit">
+                <div class="button-container">
+                    <button type="submit" name="action" value="backward">Previous</button>
+                    <button type="submit" id="nextbutton" name="action" value="forward">Next</button>
+                </div>
             </p>
         </div>
     </div>
 </form>
-
-<!--can't get to work correctly-->
-<!--<div class="navigation">
-    <form action="/quizsa" method="POST">
-        <input type="hidden" name="index" value="{{ index - 1 }}">
-        <button type="submit">Previous</button>
-    </form>
-    <form action="/quizsa" method="POST">
-        <input type="hidden" name="index" value="{{ index + 1 }}">
-        <button type="submit">Next</button>
-    </form>
-</div>-->
 {% endblock %}
+
+
