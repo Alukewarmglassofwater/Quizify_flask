@@ -1,5 +1,5 @@
 from app import app
-from flask import Flask, render_template, redirect, url_for, request, session, flash, g, send_from_directory
+from flask import Flask, render_template, redirect, url_for, request, session, flash, g, send_from_directory, jsonify, render_template_string
 from functools import wraps
 import sqlite3
 import re
@@ -128,9 +128,16 @@ def get_question(index):
     conn.close()
     return question_data
 
+from flask import jsonify
+
 @app.route('/quizmcq', methods=['GET', 'POST'])
 def quiz():
     if request.method == 'POST':
+        # Check if any radio button is selected
+        if 'answer' not in request.form:
+            # If no radio button is selected, return an alert box using JavaScript
+            return render_template_string('<script>alert("Please select an answer."); window.history.back();</script>')
+
         # Get selected answer
         selected_answer = request.form['answer']
         user_answer_list.append(selected_answer)
@@ -165,8 +172,9 @@ def quiz():
                       (session.get("email"), score_sum))
         conn.commit()
         conn.close() 
-                
-        return "Quiz completed!" + "Total correct answers: " + str(score_sum)
+        
+        return render_template('quizcompleted.html', score_sum=score_sum)
+
 
 @app.route('/quizsa', methods=['GET', 'POST'])
 def quizsa():
@@ -184,20 +192,20 @@ def quizsa():
 
         # Check if the index is valid
         if 0 <= question_index < len(questions):
+            # Fetch the next question
+            next_question = questions[question_index]
+
             # Increment the question index for the next question
             next_index = question_index + 1
 
             # Check if there are more questions
             if next_index < len(questions):
-                # Fetch the next question
-                next_question = questions[next_index]
                 conn.close()
                 return render_template('quizsa.html', title='Shortanswer', question=next_question, index=next_index)
 
         # No more questions, quiz completed
         conn.close()
-        return "Quiz completed!"
-
+        return render_template('quizcompletedSA.html')
     else:
         # Connect to the database
         conn = sqlite3.connect(DATABASE)
@@ -211,3 +219,12 @@ def quizsa():
         conn.close()
 
         return render_template('quizsa.html', title='Shortanswer', question=first_question, index=0)
+
+
+@app.route('/quizcompleted')
+def quiz_completed():
+    return render_template('quizcompleted.html')
+
+@app.route('/quizcompletedSA')
+def quiz_completed_SA():
+    return render_template('quizcompletedSA.html')

@@ -1,51 +1,53 @@
 .classroom {
-    /* background-color: rgb(246, 246, 246); */
-    position: absolute;
-    right: 10vw;
-    bottom: 4vh;
-    width: 50%;
-    height: auto;
-    /* display: grid;
-    grid-template: repeat(2, 1fr) / repeat(1, 1fr);
-    justify-content: space-evenly;
-    align-content: space-evenly; */
-    grid-gap: 13vh;
-    text-align: center;
-    
+    /* Flexbox styles */
+    display: flex;
+    flex-direction: column; /* Arrange items in a column */
+    height: 670px; /* Optional: Set height for the container */
+    width: 800px;
+    margin-right: -700px; /* Move 20px from the right of the screen */
+    margin-top: 300px;
+    justify-content: space-between; /* Align items on the start and end of the container */
 }
 
 .classroom ul {
     list-style-type: none;
-    padding: 0%;
-    margin: 0px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+    padding: 0; /* Remove default padding */
 }
 
 .classroom li {
-    flex-basis: 100%;
+    display: flex; /* Set list items as flex containers */
+    flex-direction: column; /* Arrange items in a column */
+    align-items: center; /* Center items horizontally */
+    text-align: center; /* Center text horizontally */
+    margin-bottom: 20px; /* Add space between items */
 }
 
- .classroom a {
-    color: white;
-    text-decoration: none;
-    padding: 15px;
-    display: block;
+#multichoicetext {
+    align-self: flex-start; /* Aligns item to the start (left) */
 }
-/*
-.classroom a:hover {
-    background-color:rgb(177, 50, 124);
-} */
+
+#shortanswertext {
+    align-self: flex-end; /* Aligns item to the end (right) */
+}
+
+#mcqImage, #qaImage {
+    width: 250px;
+    height: 200px;
+}
 
 #mcqImage {
-    width: 250px;
-    height: auto;
+    margin-right: 550px;
+}
+#qaImage {
+    margin-left: 400px;
 }
 
-#qaImage {
-    width: 250px;
-    height: auto;
+#shortanswertext {margin-right: 100px}
+#multichoicetext {margin-left: 10px}
+
+
+#multichoicetext, #shortanswertext {
+    margin-top: 10px; /* Add space between text and image */
 }
 
 #mcqImage, #qaImage {

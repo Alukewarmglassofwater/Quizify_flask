@@ -11,3 +11,9 @@
 #mcqbackround {
     background-color: orange;
 }
+
+.navigation {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px; /* Add some space between the submit button and the navigation */
+}
