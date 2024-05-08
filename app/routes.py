@@ -165,7 +165,7 @@ def quiz():
             if user_answer_list[index] == correct_answer_list[index]:
                 score_sum = score_sum + 1
         
-        # store quiz score into the database
+        # Store quiz score into the database
         conn = sqlite3.connect(DATABASE)
         c = conn.cursor()
 
@@ -175,18 +175,17 @@ def quiz():
         existing_record = c.fetchone()
 
         if existing_record:
-            # Email already exists, render the retake.html page
-            conn.close()
-            return render_template('retake.html', title='ERROR')
+            # Email already exists, update the existing record
+            c.execute('''UPDATE userquizscore SET name = ?, score = ? WHERE email = ?''', 
+                        (session.get("name"), score_sum, email))
         else:
             # Insert a new record
-            c.execute('''INSERT INTO userquizscore (name, email, score)VALUES (?, ?, ?)''', 
-                    (session.get("name"), email, score_sum))
-            conn.commit()
-            conn.close() 
+            c.execute('''INSERT INTO userquizscore (name, email, score) VALUES (?, ?, ?)''', 
+                        (session.get("name"), email, score_sum))
 
-        
-        
+        conn.commit()
+        conn.close()
+
         return render_template('quizcompleted.html', score_sum=score_sum)
 
 
