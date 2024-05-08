@@ -168,10 +168,23 @@ def quiz():
         # store quiz score into the database
         conn = sqlite3.connect(DATABASE)
         c = conn.cursor()
-        c.execute('''INSERT INTO userquizscore (name, email, score)VALUES (?, ?, ?)''', 
-                      (session.get("name"), session.get("email"), score_sum))
-        conn.commit()
-        conn.close() 
+
+        # Check if the email already exists in the userquizscore table
+        email = session.get("email")
+        c.execute('''SELECT * FROM userquizscore WHERE email = ?''', (email,))
+        existing_record = c.fetchone()
+
+        if existing_record:
+            # Email already exists, render the retake.html page
+            conn.close()
+            return render_template('retake.html', title='ERROR')
+        else:
+            # Insert a new record
+            c.execute('''INSERT INTO userquizscore (name, email, score)VALUES (?, ?, ?)''', 
+                    (session.get("name"), email, score_sum))
+            conn.commit()
+            conn.close() 
+
         
         
         return render_template('quizcompleted.html', score_sum=score_sum)
@@ -230,23 +243,8 @@ def quiz_completed():
 def quiz_completed_SA():
     return render_template('quizcompletedSA.html')
 
-@app.route('/submit_score', methods=['POST'])
-def submit_score():
-    if request.method == 'POST':
-        name = request.form['name']
-        email = request.form['email']
-        score_sum = request.form['score_sum']
-        
-        # Connect to the database
-        conn = sqlite3.connect(DATABASE)
-        cursor = conn.cursor()
-        
-        # Insert the user's name, email, and quiz score into the userquizscore table
-        cursor.execute('''INSERT INTO userquizscore (name, email, score) VALUES (?, ?, ?)''', (name, email, score_sum))
-        
-        conn.commit()
-        conn.close()
-        
-        return "Score submitted successfully!"
-    else:
-        return "Method not allowed"
+@app.route('/retakingquiz')
+def retakingquiz():
+    return render_template('retake.html')
+
+from flask import render_template
