@@ -5,6 +5,9 @@
     <div class="container">
         <h2>User Registration</h2>
         <form action="/register" method="POST">
+            {% if mesage is defined and mesage %}
+			    <div class="alert alert-warning">{{ mesage }}</div>
+		    {% endif %}
             <label for="name">Name:</label><br>
             <input 
                 type="text" 
