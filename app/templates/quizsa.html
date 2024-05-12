@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-<form action="/quizsa" method="POST">
+<!-- <form action="/quizsa" method="POST">
     <input type="hidden" name="index" value="{{ index }}">
     <div class="container">
         <h2>Short answer</h2>
@@ -12,10 +12,7 @@
             <input type="text" id="textboxid" name="answer" maxlength="42"><br><br>
             <p>
                 <input id="submit" type="submit" value="Submit" name="submit">
-                <!-- <div class="navigation">
-                    <button type="submit" name="action" value="backward">Previous</button>
-                    <button type="submit" id="nextbutton" name="action" value="forward">Next</button>
-                </div> -->
+              
             </p>
             <div class="navigation">
                 <button type="submit" name="action" value="backward">Previous</button>
@@ -23,7 +20,23 @@
             </div>
         </div>
     </div>
+</form> -->
+
+<form id="containSA" action="/quizsa" method="POST">
+        <div class="container">
+            <h2>Short answer</h2>
+            {% for question in questions %}
+            <div class="question-answer">
+                <p>{{ question }}</p>
+                <input type="text" id="textboxid" name="answer" maxlength="42"><br><br>
+            </div>
+            {% endfor %}
+            <p>
+                <input id="submit" type="submit" value="Submit" name="submit">
+            </p>
+        </div>
 </form>
+
 {% endblock %}
 
 

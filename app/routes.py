@@ -187,72 +187,105 @@ def quiz():
 
         return render_template('quizcompleted.html', score_sum=score_sum)
 
+
+
+
+# @app.route('/quizsa', methods=['GET', 'POST'])
+# def quizsa():
+#     global doc
+#     # Initialize the session variable at the start of the function
+#     if 'index' not in session:
+#         session['index'] = 0
+#     if request.method == 'POST':
+#         # Get the submitted question index
+#         question_index = session.get('index', 0)
+        
+#         # Connect to the database
+#         conn = sqlite3.connect(DATABASE)
+#         cursor = conn.cursor()
+        
+#         # Fetch short-answer questions from the database
+#         cursor.execute("SELECT question FROM shortanswerquestions")
+#         questions = [row[0] for row in cursor.fetchall()]
+#         # Check if the index is valid
+#         if 0 <= question_index < len(questions):
+#             # Fetch the current question
+#             current_question = questions[question_index]
+#             answer = request.form['answer']
+#             print("Question: " + current_question + " Answer: " + answer + " Current Index: " + str(question_index))            
+#             export_to_word(current_question, answer)
+            
+#             question_index += 1
+#             # Update the session variable
+#             session['index'] = question_index
+
+#             # Close the database connection
+#             conn.close()
+
+#             return render_template('quizsa.html', title='Shortanswer', question=current_question, index=question_index)
+#         # Save the document
+#         doc.save('quiz_answers.docx')  
+#         doc = Document()
+#         # No more questions, quiz completed
+        
+#         conn.close()
+#         return render_template('quizcompletedSA.html')
+#     else:
+#         # Connect to the database
+#         conn = sqlite3.connect(DATABASE)
+#         cursor = conn.cursor()
+
+#         # Fetch the first short-answer question from the database
+#         cursor.execute("SELECT question FROM shortanswerquestions LIMIT 1")
+#         first_question = cursor.fetchone()[0]
+
+#         # Initialize the session variable
+#         session['index'] = 0
+
+#         # Close the database connection
+#         conn.close()
+
+#         return render_template('quizsa.html', title='Shortanswer', question=first_question, index=0)
+
 doc = Document()
-def export_to_word(question, answer):
-    
-    doc.add_paragraph('Question: ' + question)
-    doc.add_paragraph('Answer: ' + answer)
-
-
 @app.route('/quizsa', methods=['GET', 'POST'])
 def quizsa():
-    global doc
+    # Connect to the database
+    conn = sqlite3.connect(DATABASE)
+    cursor = conn.cursor()
+
+    # Fetch all short-answer questions from the database
+    cursor.execute("SELECT question FROM shortanswerquestions")
+    questions = [row[0] for row in cursor.fetchall()]
+
     if request.method == 'POST':
-        # Get the submitted question index
-        question_index = int(request.form['index'])
-        
-        # Check for button actions
-        if 'submit' in request.form:
-            print("submit clicked")
-            question_index += 1
-            
-        if 'action' in request.form:
-            action = request.form['action']
-            if action == 'forward':
-                # Move to the next question
-                question_index += 1
-            elif action == 'backward':
-                # Move to the previous question
-                if question_index > 0:
-                    question_index -= 1
-        
-        # Connect to the database
-        conn = sqlite3.connect(DATABASE)
-        cursor = conn.cursor()
+        answers = request.form.getlist('answer')
 
-        # Fetch short-answer questions from the database
-        cursor.execute("SELECT question FROM shortanswerquestions")
-        questions = [row[0] for row in cursor.fetchall()]
-        # Check if the index is valid
-        if 0 <= question_index < len(questions):
-            # Fetch the current question
-            current_question = questions[question_index]
-            answer = request.form['answer']
-            print("Question: " + current_question + " Answer: " + answer + " Current Index: " + str(question_index))            
-            export_to_word(current_question, answer)
-            # Close the database connection
-            conn.close()
+        # Fetch user profile
+        email = session['email'] 
+        cursor.execute('''
+            SELECT user.ID, user.name, user.email
+            FROM user
+            WHERE user.email = ?
+        ''', (email,))
+        userProfile = cursor.fetchone()
 
-            return render_template('quizsa.html', title='Shortanswer', question=current_question, index=question_index)
-        # Save the document
-        doc.save('quiz_answers.docx')  
-        doc = Document()
-        # No more questions, quiz completed
-        conn.close()
+        # Add user profile to the Word document
+        doc.add_paragraph('User ID: ' + str(userProfile[0]))
+        doc.add_paragraph('Name: ' + userProfile[1])
+        doc.add_paragraph('Email: ' + userProfile[2])
+
+        # Add questions and answers to the Word document
+        for question, answer in zip(questions, answers):
+            doc.add_paragraph('Question: ' + question)
+            doc.add_paragraph('Answer: ' + answer)
+        doc.save("quiz_answers.docx")
+        
         return render_template('quizcompletedSA.html')
-    else:
-        # Connect to the database
-        conn = sqlite3.connect(DATABASE)
-        cursor = conn.cursor()
+    # Close the database connection
+    conn.close()
 
-        # Fetch the first short-answer question from the database
-        cursor.execute("SELECT question FROM shortanswerquestions LIMIT 1")
-        first_question = cursor.fetchone()[0]
-
-        # Close the database connection
-        conn.close()
-
-        return render_template('quizsa.html', title='Shortanswer', question=first_question, index=0)
+    return render_template('quizsa.html', title='Shortanswer', questions=questions)
 
 
 
