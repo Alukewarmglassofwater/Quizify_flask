@@ -180,6 +180,9 @@ def quiz():
 
         conn.commit()
         conn.close()
+        
+        user_answer_list.clear()
+        correct_answer_list.clear()
 
         return render_template('quizcompleted.html', score_sum=score_sum)
 
