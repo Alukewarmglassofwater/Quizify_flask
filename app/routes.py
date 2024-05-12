@@ -1,6 +1,7 @@
 from app import app
 from flask import Flask, render_template, redirect, url_for, request, session, flash, g, send_from_directory, jsonify, render_template_string
 from functools import wraps
+from docx import Document
 import sqlite3
 import re
 
@@ -186,9 +187,16 @@ def quiz():
 
         return render_template('quizcompleted.html', score_sum=score_sum)
 
+doc = Document()
+def export_to_word(question, answer):
+    
+    doc.add_paragraph('Question: ' + question)
+    doc.add_paragraph('Answer: ' + answer)
+
 
 @app.route('/quizsa', methods=['GET', 'POST'])
 def quizsa():
+    global doc
     if request.method == 'POST':
         # Get the submitted question index
         question_index = int(request.form['index'])
@@ -201,7 +209,8 @@ def quizsa():
                 question_index += 1
             elif action == 'backward':
                 # Move to the previous question
-                question_index -= 1
+                if question_index > 0:
+                    question_index -= 1
         
         # Connect to the database
         conn = sqlite3.connect(DATABASE)
@@ -210,17 +219,20 @@ def quizsa():
         # Fetch short-answer questions from the database
         cursor.execute("SELECT question FROM shortanswerquestions")
         questions = [row[0] for row in cursor.fetchall()]
-
         # Check if the index is valid
         if 0 <= question_index < len(questions):
             # Fetch the current question
             current_question = questions[question_index]
-
+            answer = request.form['answer']
+            print("Question: " + current_question + " Answer: " + answer + " Current Index: " + str(question_index))            
+            export_to_word(current_question, answer)
             # Close the database connection
             conn.close()
 
             return render_template('quizsa.html', title='Shortanswer', question=current_question, index=question_index)
-
+        # Save the document
+        doc.save('quiz_answers.docx')  
+        doc = Document()
         # No more questions, quiz completed
         conn.close()
         return render_template('quizcompletedSA.html')
