@@ -1,5 +1,5 @@
 from app import app
-from flask import Flask, render_template, redirect, url_for, request, session, flash, g, send_from_directory
+from flask import Flask, render_template, redirect, url_for, request, session, flash, g, send_from_directory, jsonify, render_template_string
 from functools import wraps
 import sqlite3
 import re
@@ -20,9 +20,9 @@ def login_required(f):
         if 'logged_in' in session:
             return f(*args, **kwargs)
         else:
-            flash('Login is required.')
             return redirect(url_for('login'))
     return wrap
+
 
 
 @app.route('/')
@@ -54,14 +54,35 @@ def login():
 @login_required
 def logout():
     session.pop('logged_in', None)
-    flash('Logout successful!')
     return redirect('/login')
+
+
 
 @app.route('/home')
 @login_required
 def home():
-    user = {'username': 'Teststudent'}
-    return render_template('home.html', title='Home')
+    # get the current user email
+    email = session['email']
+    conn = sqlite3.connect(DATABASE)
+    c = conn.cursor()
+
+    # Fetch the leaderboard
+    c.execute('SELECT * FROM userquizscore ORDER BY score DESC')
+    leaderboard = c.fetchall()
+
+    # Fetch the user profile if no score then score = 0
+    c.execute('''
+        SELECT user.ID, user.name, user.email, IFNULL(userquizscore.score, 0) as score
+        FROM user
+        LEFT JOIN userquizscore
+        ON user.email = userquizscore.email
+        WHERE user.email = ?
+    ''', (email,))
+    userProfile = c.fetchone()
+    conn.commit()
+    conn.close()
+
+    return render_template('home.html', leaderboard=leaderboard, userProfile=userProfile)
 
 
 @app.route('/register', methods = ['GET', 'POST'])
@@ -102,9 +123,16 @@ def get_question(index):
     conn.close()
     return question_data
 
+from flask import jsonify
+
 @app.route('/quizmcq', methods=['GET', 'POST'])
 def quiz():
     if request.method == 'POST':
+        # Check if any radio button is selected
+        if 'answer' not in request.form:
+            # If no radio button is selected, return an alert box using JavaScript
+            return render_template_string('<script>alert("Please select an answer."); window.history.back();</script>')
+
         # Get selected answer
         selected_answer = request.form['answer']
         user_answer_list.append(selected_answer)
@@ -132,22 +160,46 @@ def quiz():
             if user_answer_list[index] == correct_answer_list[index]:
                 score_sum = score_sum + 1
         
-        # store quiz score into the database
+        # Store quiz score into the database
         conn = sqlite3.connect(DATABASE)
         c = conn.cursor()
-        c.execute('''INSERT INTO userquizscore (email, score)VALUES ( ?, ?)''', 
-                      (session.get("email"), score_sum))
+
+        # Check if the email already exists in the userquizscore table
+        email = session.get("email")
+        c.execute('''SELECT * FROM userquizscore WHERE email = ?''', (email,))
+        existing_record = c.fetchone()
+
+        if existing_record:
+            # Email already exists, update the existing record
+            c.execute('''UPDATE userquizscore SET name = ?, score = ? WHERE email = ?''', 
+                        (session.get("name"), score_sum, email))
+        else:
+            # Insert a new record
+            c.execute('''INSERT INTO userquizscore (name, email, score) VALUES (?, ?, ?)''', 
+                        (session.get("name"), email, score_sum))
+
         conn.commit()
-        conn.close() 
-                
-        return "Quiz completed!" + "Total correct answers: " + str(score_sum)
+        conn.close()
+
+        return render_template('quizcompleted.html', score_sum=score_sum)
+
 
 @app.route('/quizsa', methods=['GET', 'POST'])
 def quizsa():
     if request.method == 'POST':
         # Get the submitted question index
         question_index = int(request.form['index'])
-
+        
+        # Check for button actions
+        if 'action' in request.form:
+            action = request.form['action']
+            if action == 'forward':
+                # Move to the next question
+                question_index += 1
+            elif action == 'backward':
+                # Move to the previous question
+                question_index -= 1
+        
         # Connect to the database
         conn = sqlite3.connect(DATABASE)
         cursor = conn.cursor()
@@ -158,20 +210,17 @@ def quizsa():
 
         # Check if the index is valid
         if 0 <= question_index < len(questions):
-            # Increment the question index for the next question
-            next_index = question_index + 1
+            # Fetch the current question
+            current_question = questions[question_index]
 
-            # Check if there are more questions
-            if next_index < len(questions):
-                # Fetch the next question
-                next_question = questions[next_index]
-                conn.close()
-                return render_template('quizsa.html', title='Shortanswer', question=next_question, index=next_index)
+            # Close the database connection
+            conn.close()
+
+            return render_template('quizsa.html', title='Shortanswer', question=current_question, index=question_index)
 
         # No more questions, quiz completed
         conn.close()
-        return "Quiz completed!"
-
+        return render_template('quizcompletedSA.html')
     else:
         # Connect to the database
         conn = sqlite3.connect(DATABASE)
@@ -185,3 +234,19 @@ def quizsa():
         conn.close()
 
         return render_template('quizsa.html', title='Shortanswer', question=first_question, index=0)
+
+
+
+@app.route('/quizcompleted')
+def quiz_completed():
+    return render_template('quizcompleted.html')
+
+@app.route('/quizcompletedSA')
+def quiz_completed_SA():
+    return render_template('quizcompletedSA.html')
+
+@app.route('/retakingquiz')
+def retakingquiz():
+    return render_template('retake.html')
+
+from flask import render_template

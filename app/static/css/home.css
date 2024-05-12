@@ -1,58 +1,170 @@
-.homepagecontainer {
-    background-color: rgb(158, 136, 149);
-    position: absolute;
-    right: 4vw;
-    bottom: 4vh;
-    width: 50%;
-    height: auto;
-    display: grid;
-    grid-template: repeat(2, 1fr) / repeat(1, 1fr);
-    justify-content: space-evenly;
-    align-content: space-evenly;
-    grid-gap: 13vh;
-    text-align: center;
+.classroom {
+    /* Flexbox styles */
+    display: flex;
+    flex-direction: column; /* Arrange items in a column */
+    height: 670px; /* Optional: Set height for the container */
+    width: 800px;
+    margin-right: -700px; /* Move 20px from the right of the screen */
+    margin-top: 300px;
+    justify-content: space-between; /* Align items on the start and end of the container */
 }
 
-.math, .english {
-    text-align: center;
-    width: 100%;
-    height: auto;
-    grid-column: 1 / 1 ;
+.classroom ul {
+    list-style-type: none;
+    padding: 0; /* Remove default padding */
 }
 
-.math {
-    background-color: rgb(119, 119, 170);
-    grid-row: 1 / 1 ;
-    align-self: end;
+.classroom li {
+    display: flex; /* Set list items as flex containers */
+    flex-direction: column; /* Arrange items in a column */
+    align-items: center; /* Center items horizontally */
+    text-align: center; /* Center text horizontally */
+    margin-bottom: 20px; /* Add space between items */
 }
 
-.english {
-    background-color: rgb(48, 173, 115);
-    grid-row: 2 / 2 ;
-    align-self: start;
+#multichoicetext {
+    align-self: flex-start; /* Aligns item to the start (left) */
 }
-#mathtext {margin-top: 7.5%;}
 
-#englishtext {margin-top: 7.5%;}
+#shortanswertext {
+    align-self: flex-end; /* Aligns item to the end (right) */
+}
+
+#mcqImage, #qaImage {
+    width: 300px;
+    height: 250px;
+}
+
+#mcqImage {
+    position: relative;
+    top: 5px; /* Adjust the top position as needed */
+    right: 280px; /* Adjust the left position as needed */
+}
+
+#qaImage {
+    position: relative;
+    top: 5px; /* Adjust the top position as needed */
+    left: 200px; /* Adjust the left position as needed */
+}
+
+#shortanswertext {margin-right: 100px}
+#multichoicetext {margin-left: 10px}
+
+
+#multichoicetext, #shortanswertext {
+    margin-top: 10px; /* Add space between text and image */
+}
+
+#mcqImage, #qaImage {
+    transition: transform 0.3s ease;
+}
+
+#mcqImage:hover, #qaImage:hover {
+    transform: scale(1.2);
+    border-radius: 20%;
+    border: 1px solid rgba(0, 0, 0, 0.652);
+}
+
+@media (min-width: 300px) {
+
+    .classroom li {
+        flex-basis: calc(50% - 10px);
+    }
+}
 
 #titlediv {
     position: absolute;
-    top: 22vh;
-    left: 50%;
-    width: 80vw;
-    height: 8vh;
-    background-color: rgb(144, 17, 81);
+    color: rgb(250, 250, 250);
+    filter: drop-shadow(1px 1px red);
+    top: 10vh;
+    left: 5vw;
+    /* background-color: rgb(144, 17, 81); */
     text-align: center;
-    transform: translateX(-50%);
 }
 
 .leaderboard {
-    background-color: orange;
+    background-color: rgba(109, 69, 254, 0.99); /* Semi-transparent white */
+    padding: 20px;
+    border-radius: 15px;
     position: absolute;
     left: 4vw;
     bottom: 4vh;
     width: 30%;
     height: 64vh;
     text-align: center;
+    border: 2px solid #28075a;
+}
+.leaderboard h2 {
+    text-align: center;
+    color: #000000;
+    margin-bottom: 20px;
 }
 
+.leaderboard table{
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.leaderboard th,
+.leaderboard td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+.leaderboard tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+.leaderboard tr:nth-child(odd) {
+    background-color: #d5c4c4;
+}
+
+.leaderboard tr:nth-child(2) {
+    background-color: #f34949;
+}
+.leaderboard tr:nth-child(3) {
+    background-color: #e4f923;
+}
+.leaderboard tr:nth-child(4) {
+    background-color: #43d8f3;
+}
+.leaderboard th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    background-color: #4CAF50;
+    color: white;
+}
+
+.profile {
+    position: absolute;
+    right: 3vw;
+    top: 10vh;
+    width: 30%;
+    height: auto;
+    max-width: 400px;
+    margin: 0 auto;
+    background: #F0F8FF;
+    padding: 30px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px #ccc;
+    border: 2px solid black;
+}
+.profile h1 {
+    text-align: center;
+    color: #333;
+    margin: 0 0 15px 0;
+    padding: 0;
+    font-size: 24px;
+    border-bottom: 1px solid #e5e5e5;
+}
+.profile p {
+    font-size: 18px;
+    margin: 0 0 10px 0;
+    line-height: 1.6;
+}
+.profile p strong {
+    font-weight: bold;
+}

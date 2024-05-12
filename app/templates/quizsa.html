@@ -9,14 +9,21 @@
             <p>{{ question }}</p>
         </div>
         <div class="shortanswer">
-            <div class="shortanswer">
-                <input type="text" id="textboxid" name="answer" maxlength="42"><br><br>
-                <p>
-                    <input id="submit" type="submit" value="Submit">
-                </p>
+            <input type="text" id="textboxid" name="answer" maxlength="42"><br><br>
+            <p>
+                <input id="submit" type="submit" value="Submit">
+                <!-- <div class="navigation">
+                    <button type="submit" name="action" value="backward">Previous</button>
+                    <button type="submit" id="nextbutton" name="action" value="forward">Next</button>
+                </div> -->
+            </p>
+            <div class="navigation">
+                <button type="submit" name="action" value="backward">Previous</button>
+                <button type="submit" id="nextbutton" name="action" value="forward">Next</button>
             </div>
         </div>
     </div>
 </form>
-
 {% endblock %}
+
+

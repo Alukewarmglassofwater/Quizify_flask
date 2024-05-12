@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-<form action="/quizmcq?index={{ index }}" method="POST">
+<form action="/quizmcq?index={{ index }}" method="POST" onsubmit="return validateForm()">
     <div class="container">
         <h2>Multiple Choice Question</h2>
         <div class="question">
@@ -17,10 +17,33 @@
                 {% endif %}
             </div>
             {% endfor %}
-            <p>
-                <input id="submit" type="submit" value="Submit">
-            </p>
+        </div>
+        <p>
+            <input id="submit" type="submit" value="Submit">
+        </p>
+        <div class="navigation">
+            <!-- Left navigation button -->
+            <button type="button" id="leftButton" onclick="navigate(-1)">Previous</button>
+            <!-- Right navigation button -->
+            <button type="button" id="rightButton" onclick="navigate(1)">Next</button>
         </div>
     </div>
 </form>
+
+<script>
+    function navigate(offset) {
+        var currentIndex = parseInt('{{ index }}');
+        var newIndex = currentIndex + offset;
+        window.location.href = "/quizmcq?index=" + newIndex;
+    }
+
+    function validateForm() {
+        var selectedAnswer = document.querySelector('input[name="answer"]:checked');
+        if (!selectedAnswer) {
+            alert("Please select an answer.");
+            return false; // Prevent form submission
+        }
+        return true; // Allow form submission
+    }
+</script>
 {% endblock %}
