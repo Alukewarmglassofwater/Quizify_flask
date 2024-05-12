@@ -202,6 +202,10 @@ def quizsa():
         question_index = int(request.form['index'])
         
         # Check for button actions
+        if 'submit' in request.form:
+            print("submit clicked")
+            question_index += 1
+            
         if 'action' in request.form:
             action = request.form['action']
             if action == 'forward':
