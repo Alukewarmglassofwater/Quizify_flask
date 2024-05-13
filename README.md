@@ -73,7 +73,7 @@ Due to the application being based on Flask everything is contained inside the Q
 - Virtual environment now set up
  
 5. Flask modules install
-`$pip install -r requirement.txt`
+`$pip install -r requirements.txt`
 
 6. Flask setup and configuration
 - Point flask run variable to the quizify.py file
@@ -162,7 +162,7 @@ Open "Python IDLE" application on your system.
 - Virtual environment now set up
 
 5. Flask modules install
-`$pip install -r requirement.txt`
+`$pip install -r requirements.txt`
 
 6. Flask setup and configuration
 - Point flask run variable to the quizify.py file
