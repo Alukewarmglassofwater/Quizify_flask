@@ -28,6 +28,7 @@ Due to the application being based on Flask everything is contained inside the Q
 `$git clone https://github.com/Alukewarmglassofwater/Quizify_flask`
 
 - The file structure should look like this at this point:
+```bash
 .
 └── tmp/
     └── Quizify_flask/
@@ -41,6 +42,7 @@ Due to the application being based on Flask everything is contained inside the Q
         ├── instance
         ├── static
         └── templates
+```
 - cd into Quizify_flask
 `$cd Quizify_flask`
 - Install pip, the python package manager
@@ -48,6 +50,7 @@ Due to the application being based on Flask everything is contained inside the Q
 - Create virtual environment
 `$python3 -m venv venv`
 - File structure should now look like this
+```bash
 .
 └── tmp/
     └── Quizify_flask/
@@ -62,6 +65,7 @@ Due to the application being based on Flask everything is contained inside the Q
         ├── static
         ├── templates
         └── venv (### venv folder created ###)
+```
 - Activate virtual environment
 `$source venv/bin/activate`
 - Prompt should change to reflect the virtual environment
@@ -113,6 +117,7 @@ Open "Python IDLE" application on your system.
 4. Python virtual environment setup
 
 - The file structure should look like this at this point:
+```bash
 .
 └── tmp/
     └── Quizify_flask/
@@ -126,6 +131,7 @@ Open "Python IDLE" application on your system.
         ├── instance
         ├── static
         └── templates
+```
 - cd into Quizify_flask
 `$cd Quizify_flask`
 - Install pip, the python package manager
@@ -133,6 +139,7 @@ Open "Python IDLE" application on your system.
 - Create virtual environment
 `$python3 -m venv venv`
 - File structure should now look like this
+```bash
 .
 └── tmp/
     └── Quizify_flask/
@@ -147,6 +154,7 @@ Open "Python IDLE" application on your system.
         ├── static
         ├── templates
         └── venv (### venv folder created ###)
+```
 - Activate virtual environment
 `$source venv/bin/activate`
 - Prompt should change to reflect the virtual environment
