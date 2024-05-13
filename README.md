@@ -1,17 +1,17 @@
-####Install Guide####
+# Install Guide
 
 Due to the application being based on Flask everything is contained inside the Quizify_flask folder. Extra python modules that the application uses are listed and installed via the requirements.txt file. 
 
-# Windows
+## Windows
 
-# Miscellaneous
+## Miscellaneous
 - .flaskenv : 
     1. `venv\Scripts\activate.bat` activate venv for Windows
     2. `pip install python-dotenv`
     3. no need to have extra step of 'FLASK_APP=quizify.py' just `flask run`
 
 
-# macOS
+## macOS
 
 1. Homebrew package manager install
 `$/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"`
@@ -86,7 +86,7 @@ Due to the application being based on Flask everything is contained inside the Q
 - Navigate to provided URL in your browser: 
 `http://127.0.0.1:5000`
 
-# Linux
+## Linux
 
 1. Install Git
 - Below command is for Debian. If running another distribution install package from specific package manager
