@@ -2,7 +2,7 @@
 
 Due to the application being based on Flask everything is contained inside the Quizify_flask folder. Extra python modules that the application uses are listed and installed via the requirements.txt file. 
 
-##########################Windows########################
+# Windows
 
 # Miscellaneous
 - .flaskenv : 
@@ -11,7 +11,7 @@ Due to the application being based on Flask everything is contained inside the Q
     3. no need to have extra step of 'FLASK_APP=quizify.py' just `flask run`
 
 
-##########################macOS########################
+# macOS
 
 1. Homebrew package manager install
 `$/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"`
@@ -101,10 +101,10 @@ Due to the application being based on Flask everything is contained inside the Q
 `$git clone https://github.com/Alukewarmglassofwater/Quizify_flask`
 
 3. Python environment setup
-###install python package onto your system
+- Install python package onto your system
 Download installer and run from https://www.python.org/downloads/macos/
 
-##Linux
+# Linux
 Open a terminal and, depending on the package manager, install the python3 package. A Debian example is given below.
 - Debian install
 `$sudo apt install python3`
