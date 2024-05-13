@@ -86,10 +86,10 @@ Due to the application being based on Flask everything is contained inside the Q
 - Navigate to provided URL in your browser: 
 `http://127.0.0.1:5000`
 
-##########################Linux########################
+# Linux
 
 1. Install Git
-- Below command for Debian. If running another distribution install git package from specific package manager
+- Below command is for Debian. If running another distribution install package from specific package manager
 `$sudo apt install git`
 
 2. Git clone the repository
@@ -102,9 +102,6 @@ Due to the application being based on Flask everything is contained inside the Q
 
 3. Python environment setup
 - Install python package onto your system
-Download installer and run from https://www.python.org/downloads/macos/
-
-# Linux
 Open a terminal and, depending on the package manager, install the python3 package. A Debian example is given below.
 - Debian install
 `$sudo apt install python3`
