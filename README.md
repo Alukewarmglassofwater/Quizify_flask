@@ -172,20 +172,32 @@ Open "Python IDLE" application on your system.
 - Navigate to provided URL in your browser: 
 http://127.0.0.1:5000
 
+## Windows
 
-# app folder
-- Main stuff
-- templates: html file
-- static: css and images files
+1. Git clone the repository: 
+- Git clone https://github.com/Alukewarmglassofwater/Quizify_flask 
+- This will download the contents of quizify_flask into your current terminal directory. 
 
-# requirements.txt
-- install flask and extra module using this
-## For installation of flask module
-1. `venv\Scripts\activate.bat` activate venv for Windows
-2. `pip install -r requirements.txt` - python will install everything listed in txt file
+2. Inside the app folder, activate the virtual environment. 
+- python3 -m venv venv 
+  - This creates a folder called ‘venv’ which contains the virtual python3 install and any required packages. 
+- Activate venv 
+  - Cd into directory where venv file is present. 
+  - venv\Scripts\activate.bat (Windows) 
+   - Terminal should update with (venv). This indicates the venv has been activated. 
 
-## For update flask module for team to see
-1. `venv\Scripts\activate.bat` activate venv for Windows
-2. `pip freeze > requirements.txt` - module list will be exported to txt file
-3. `git push origin`
+3. Download module required for the project. 
+- Requirements.txt is a text file that contains all the dependencies used for the project. 
+- Install packages contained in requirement.txt into your venv file. 
+  - pip install -r requirements.txt. 
+
+4. Run the program and make sure you’re still in the venv. 
+- The program runs from a file called ‘quizify.py’ 
+- Make sure you are in this directory before running the next command. 
+- Set FLASK_RUN variable: 
+  - set FLASK_RUN=quizify.py (optional) 
+  - This tells flask that when the flask run command is invoked, initialise from the quizify.py file. 
+- flask run 
+  - This should load a prompt that states "Running on http://127.0.0.1:5000"
+  - This URL can be loaded into a browser to view the flask project. 
 
